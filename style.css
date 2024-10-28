@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('fondoAlta.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+#countdown {
+    font-family: 'Arial', sans-serif;
+    font-size: 7rem;
+    color: #fff;
+    font-weight: bold;
+    padding-bottom: 8rem;
+}
+
+img {
+    max-width: 300px;
+}
+
+.count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.count > .test {
+    width: 47vw;
+}
+
+.count > div:nth-child(2) {
+    text-align: center;
+}
+
+
+/* Haz que el video ocupe toda la pantalla */
+#backgroundVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Asegura que el video cubra todo el contenedor */
+    z-index: -1; /* Envía el video al fondo */
+}
+
+/*
+media querys para dispositivos de menos de 425px
+*/
+
+@media (max-width: 425px) {
+    #countdown {
+        font-size: 4rem;
+    }
+
+    .count > .test {
+        width: 0;
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown to 12:00 PM</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <div class="count">
+    <div class="test"></div>
+    <div>
+      <img src="./logo.png" width="300px">
+      <div id="countdown"></div>
+    </div>
+  </div>
+  <video id="backgroundVideo" autoplay muted playsinline>
+    <source src="fondoLoop2.mp4" type="video/mp4">
+    Tu navegador no soporta el video.
+  </video>
+
+
+  <script>
+    function countdownToNoon() {
+      const now = new Date();
+      const noon = new Date();
+
+      noon.setHours(0, 0, 0, 0); // Configura la hora a las 12:00 PM de hoy
+
+      if (now > noon) {
+        noon.setDate(noon.getDate() + 1); // Si ya pasaron las 12:00 PM, ajusta para el próximo día
+      }
+
+      const difference = noon - now;
+
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+
+      console.log({ difference });
+
+      if (difference <= 1000) {
+        document.getElementById("countdown").innerHTML = "¡TIEMPO!";
+        clearInterval(intervalId);
+      }
+    }
+
+    countdownToNoon();
+    const intervalId = setInterval(countdownToNoon, 1000);
+
+    const video = document.getElementById("backgroundVideo");
+    let isReversing = false; // Indica si el video está en reversa
+
+    // Función para alternar avance y retroceso
+    function toggleDirection() {
+      if (isReversing) {
+        video.currentTime -= 0.05; // Retrocede en pequeños pasos
+        if (video.currentTime <= 0) {
+          isReversing = false; // Cambia a avance cuando llega al principio
+        }
+      } else {
+        video.currentTime += 0.05; // Avanza en pequeños pasos
+        if (video.currentTime >= video.duration) {
+          isReversing = true; // Cambia a retroceso cuando llega al final
+        }
+      }
+    }
+
+    // Ejecuta toggleDirection cada 50 ms
+    const interval = setInterval(toggleDirection, 50);
+
+    // Inicia el video en silencio y en modo autoplay
+    video.muted = true;
+    video.play();
+
+  </script>
+</body>
+
+</html>
