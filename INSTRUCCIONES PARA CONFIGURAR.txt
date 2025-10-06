@@ -1,0 +1,18 @@
+INSTRUCCIONES PARA CONFIGURAR EL CONTADOR
+
+1. Ingresar a la carpeta donde esta el contador.
+2. Presionar clic derecho sobre el archivo llamado index.html o puede aparecer como index simplemente.
+3. Presionar la opción de «Abrir con».
+4. Seleccionas la opción de «Bloc de Notas» (en caso de no aparecer elegir cualquier editor de texto).
+5. Desplazarse hasta el renglón numero 44 y allí se encuentran las instrucciones para establecer cuando termina el contador.
+5. Modificar el tiempo con el formato AÑO, MES, DIA, HORA (formato 24h), MINUTO, SEGUNDO, MILISEGUNDOS.
+6. Una vez modificado el tiempo, queda guardar el archivo y abrirlo en el navegador para poder verificar que el cambio este funcionando.
+
+NOTA: Para modificar el mensaje al terminar el contador, tienen que desplazarse hasta la linea 63 y seguir las instrucciones indicadas allí.
+
+|----------------------------------------¡Feliz NSAC!----------------------------------------|
+
+  Autor: Isaías Yafar
+  Cualquier duda o consulta pueden enviarme un mail a abdel07noguera@gmail.com
+
+|--------------------------------------------------------------------------------------------|

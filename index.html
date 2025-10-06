@@ -4,9 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown to 12:00 PM</title>
+  <title>Countdown to October 5th 23:59</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    .watermark-cover {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 150px;
+      height: 40px;
+      background-color: black;
+      z-index: 1000;
+    }
   </style>
 </head>
 
@@ -14,30 +23,30 @@
   <div class="count">
     <div class="test"></div>
     <div>
-      <img src="./logo.png" width="300px">
+      <img src="./LogoNSAC.png" width="300px">
       <div id="countdown"></div>
     </div>
   </div>
   <video id="backgroundVideo" autoplay muted playsinline>
-    <source src="fondoLoop2.mp4" type="video/mp4">
+    <source src="VideoFondoEnLoop.mp4" type="video/mp4">
     Tu navegador no soporta el video.
   </video>
+  
+  <div class="watermark-cover"></div>
 
 
   <script>
-    function countdownToNoon() {
+    function countdownToMidnight() {
       const now = new Date();
-      const noon = new Date();
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //                   Modificando estos valores, pueden establecer cuando se acaba el contador                              //
+      //                          AÑO  MES DIA HORA MIN SEG MILISEGUNDOS                                                         //
+      const targetDate = new Date(2025, 9,  5,  23, 59, 59, 999); // 5 de octubre 2025, 23:59:59 (mes 9 = octubre)               //
+      //                                                                                                                         //
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      const difference = targetDate - now;
 
-      noon.setHours(0, 0, 0, 0); // Configura la hora a las 12:00 PM de hoy
-
-      if (now > noon) {
-        noon.setDate(noon.getDate() + 1); // Si ya pasaron las 12:00 PM, ajusta para el próximo día
-      }
-
-      const difference = noon - now;
-
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const hours = Math.floor(difference / (1000 * 60 * 60));
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
@@ -46,13 +55,18 @@
       console.log({ difference });
 
       if (difference <= 1000) {
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      //                                                                                                                         //
+      //         Modificando el texto de ¡TIEMPO! van a poder personalizar el mensaje al agotarse el tiempo                      //
+      //                                                                                                                         //
+      /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         document.getElementById("countdown").innerHTML = "¡TIEMPO!";
         clearInterval(intervalId);
       }
     }
 
-    countdownToNoon();
-    const intervalId = setInterval(countdownToNoon, 1000);
+    countdownToMidnight();
+    const intervalId = setInterval(countdownToMidnight, 1000);
 
     const video = document.getElementById("backgroundVideo");
     let isReversing = false; // Indica si el video está en reversa
@@ -60,12 +74,12 @@
     // Función para alternar avance y retroceso
     function toggleDirection() {
       if (isReversing) {
-        video.currentTime -= 0.05; // Retrocede en pequeños pasos
+        video.currentTime -= 0.06; // Retrocede en pequeños pasos
         if (video.currentTime <= 0) {
           isReversing = false; // Cambia a avance cuando llega al principio
         }
       } else {
-        video.currentTime += 0.05; // Avanza en pequeños pasos
+        video.currentTime += 0.06; // Avanza en pequeños pasos
         if (video.currentTime >= video.duration) {
           isReversing = true; // Cambia a retroceso cuando llega al final
         }
